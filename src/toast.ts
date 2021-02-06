@@ -1,13 +1,9 @@
-export interface ToastService {
-  showToast(msg: string): void;
-}
-
 // tslint:disable-next-line:class-name
 export class resource {
-  static toast = null;
+  static toast: HTMLElement;
 }
 
-export function fadeIn(el: any, display = null): void {
+export function fadeIn(el: any, display?: string): void {
   el.style.opacity = 0;
   el.style.display = display || 'block';
 
@@ -33,7 +29,7 @@ export function fadeOut(el: any): void {
   })();
 }
 
-export function showToast(msg: string): void {
+export function toast(msg: string): void {
   if (!resource.toast) {
     resource.toast = (window as any).sysToast;
   }
@@ -43,11 +39,3 @@ export function showToast(msg: string): void {
     fadeOut(resource.toast);
   }, 1340);
 }
-
-class DefaultToastService {
-  showToast(msg: string): void {
-    showToast(msg);
-  }
-}
-
-export const toast = new DefaultToastService();
